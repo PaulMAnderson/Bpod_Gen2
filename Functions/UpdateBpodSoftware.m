@@ -76,7 +76,7 @@ tempDir = fullfile(path.LocalDir, 'Temp');
 % Check for latest version
 currentVersion = BpodSoftwareVersion_Semantic;
 latestVersion = [];
-[reply, status] = urlread('https://raw.githubusercontent.com/sanworks/Bpod_Gen2/master/Functions/Internal%20Functions/BpodSoftwareVersion_Semantic.m');
+[reply, status] = urlread('https://raw.githubusercontent.com/PaulMAnderson/Bpod_Gen2/master/Functions/Internal%20Functions/BpodSoftwareVersion_Semantic.m');
 verPos = find(reply == '=');
 if ~isempty(verPos)
     latestVersion = strtrim(reply(verPos(end)+2:end-2));
@@ -122,7 +122,7 @@ if lower(reply) == 'y'
     downloadDir = fullfile(tempDir, 'Download');
     zipFilePath = fullfile(downloadDir, 'Bpod_Gen2.zip');
     mkdir(downloadDir);
-    websave(zipFilePath, 'http://github.com/sanworks/Bpod_Gen2/archive/master.zip');
+    websave(zipFilePath, 'http://github.com/PaulMAnderson/Bpod_Gen2/archive/master.zip');
     disp('Extracting new software...')
     unzip(zipFilePath, downloadDir);
     delete(zipFilePath);
