@@ -64,14 +64,14 @@ switch Op
         end
         TabNames = fieldnames(Tabs);
         nTabs = length(TabNames);
-             
+            
         % Newly added closing functions
         if isfield(Params, 'CloseFunction')
-           closeFunction = Params.CloseFunction;
+            closeFunction = Params.CloseFunction;
         else
-           closeFunction = [];
+            closeFunction = [];
         end   
-            
+
         Params = Params.GUI;
         PanelNames = PanelNames(end:-1:1);
         GUIHeight = 650;
@@ -80,7 +80,7 @@ switch Op
         ParamNum = 1;
         BpodSystem.ProtocolFigures.ParameterGUI = figure('Position', [50 50 450 GUIHeight],'name','Parameter GUI','numbertitle','off', 'MenuBar', 'none', 'Resize', 'on');
         if ~isempty(closeFunction)
-           BpodSystem.ProtocolFigures.ParameterGUI.CloseRequestFcn = closeFunction;
+            BpodSystem.ProtocolFigures.ParameterGUI.CloseRequestFcn = closeFunction;
         end
         BpodSystem.GUIHandles.ParameterGUI.Tabs.TabGroup = uitabgroup(BpodSystem.ProtocolFigures.ParameterGUI);
         [~, SettingsFile] = fileparts(BpodSystem.Path.Settings);
@@ -214,7 +214,8 @@ switch Op
                 end
                 set(BpodSystem.ProtocolFigures.ParameterGUI, 'Position', [50 50 MaxHPos+450 MaxVPos+paramHeight]);
             end            
-        end        
+        end 
+ 
     case 'sync'
         ParamNames = BpodSystem.GUIData.ParameterGUI.ParamNames;
         nParams = BpodSystem.GUIData.ParameterGUI.nParams;
