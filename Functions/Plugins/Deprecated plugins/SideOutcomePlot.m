@@ -74,7 +74,11 @@ switch Action
         axes(AxesHandle);
 
         % Plot in specified axes
-        Xdata = 1:BpodSystem.GUIData.SOPnTrialsToShow; Ydata = SideList(Xdata);
+        Xdata = 1:BpodSystem.GUIData.SOPnTrialsToShow;
+        Ydata = SideList(Xdata);
+        % Had errors due to vector orientation - forcing to rows
+        Xdata = Xdata(:)';
+        Ydata = Ydata(:)';
         BpodSystem.GUIHandles.FutureTrialLine = line([Xdata,Xdata],[Ydata,Ydata],'LineStyle','none','Marker','o','MarkerEdge','b','MarkerFace','b', 'MarkerSize',6);
         BpodSystem.GUIHandles.CurrentTrialCircle = line([0,0],[0,0], 'LineStyle','none','Marker','o','MarkerEdge','k','MarkerFace',[1 1 1], 'MarkerSize',6);
         BpodSystem.GUIHandles.CurrentTrialCross = line([0,0],[0,0], 'LineStyle','none','Marker','+','MarkerEdge','k','MarkerFace',[1 1 1], 'MarkerSize',6);
@@ -101,7 +105,11 @@ switch Action
 
         % Plot future trials
         FutureTrialsIndx = CurrentTrial:mx;
-        Xdata = FutureTrialsIndx; Ydata = SideList(Xdata);
+        Xdata = FutureTrialsIndx;
+        Ydata = SideList(Xdata);
+        % Had errors due to vector orientation - forcing to rows
+        Xdata = Xdata(:)';
+        Ydata = Ydata(:)';
         set(BpodSystem.GUIHandles.FutureTrialLine, 'xdata', [Xdata,Xdata], 'ydata', [Ydata,Ydata]);
         %Plot current trial
         set(BpodSystem.GUIHandles.CurrentTrialCircle, 'xdata', [CurrentTrial,CurrentTrial], 'ydata', [SideList(CurrentTrial),SideList(CurrentTrial)]);
@@ -113,27 +121,47 @@ switch Action
 
             %Plot Error, unpunished
             EarlyWithdrawalTrialsIndx =(OutcomeRecord(indxToPlot) == -1);
-            Xdata = indxToPlot(EarlyWithdrawalTrialsIndx); Ydata = SideList(Xdata);
+            Xdata = indxToPlot(EarlyWithdrawalTrialsIndx); 
+            Ydata = SideList(Xdata);
+            % Had errors due to vector orientation - forcing to rows
+            Xdata = Xdata(:)';
+            Ydata = Ydata(:)';
             set(BpodSystem.GUIHandles.UnpunishedErrorLine, 'xdata', [Xdata,Xdata], 'ydata', [Ydata,Ydata]);
 
             %Plot Error, punished
             InCorrectTrialsIndx = (OutcomeRecord(indxToPlot) == 0);
-            Xdata = indxToPlot(InCorrectTrialsIndx); Ydata = SideList(Xdata);
+            Xdata = indxToPlot(InCorrectTrialsIndx); 
+            Ydata = SideList(Xdata);
+            % Had errors due to vector orientation - forcing to rows
+            Xdata = Xdata(:)';
+            Ydata = Ydata(:)';
             set(BpodSystem.GUIHandles.PunishedErrorLine, 'xdata', [Xdata,Xdata], 'ydata', [Ydata,Ydata]);
 
             %Plot Correct, rewarded
             CorrectTrialsIndx = (OutcomeRecord(indxToPlot) == 1);
-            Xdata = indxToPlot(CorrectTrialsIndx); Ydata = SideList(Xdata);
+            Xdata = indxToPlot(CorrectTrialsIndx); 
+            Ydata = SideList(Xdata);
+            % Had errors due to vector orientation - forcing to rows
+            Xdata = Xdata(:)';
+            Ydata = Ydata(:)';
             set(BpodSystem.GUIHandles.RewardedCorrectLine, 'xdata', [Xdata,Xdata], 'ydata', [Ydata,Ydata]);
 
             %Plot Correct, unrewarded
             UnrewardedTrialsIndx = (OutcomeRecord(indxToPlot) == 2);
-            Xdata = indxToPlot(UnrewardedTrialsIndx); Ydata = SideList(Xdata);
+            Xdata = indxToPlot(UnrewardedTrialsIndx); 
+            Ydata = SideList(Xdata);
+            % Had errors due to vector orientation - forcing to rows
+            Xdata = Xdata(:)';
+            Ydata = Ydata(:)';
             set(BpodSystem.GUIHandles.UnrewardedCorrectLine, 'xdata', [Xdata,Xdata], 'ydata', [Ydata,Ydata]);
 
             %Plot DidNotChoose
             DidNotChooseTrialsIndx = (OutcomeRecord(indxToPlot) == 3);
-            Xdata = indxToPlot(DidNotChooseTrialsIndx); Ydata = SideList(Xdata);
+            Xdata = indxToPlot(DidNotChooseTrialsIndx); 
+            Ydata = SideList(Xdata);
+            % Had errors due to vector orientation - forcing to rows
+            Xdata = Xdata(:)';
+            Ydata = Ydata(:)';
             set(BpodSystem.GUIHandles.NoResponseLine, 'xdata', [Xdata,Xdata], 'ydata', [Ydata,Ydata]);
         end
 end
