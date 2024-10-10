@@ -434,8 +434,8 @@ switch lower(paramStyle)
         % htable.Position(3) = htable.Position(3) + 20;
 
         element = htable;
-        spacing.PanelHeight = spacing.PanelHeight + (htable.Position(4)-25);       
-        spacing.YPos = spacing.YPos + 5;
+        spacing.PanelHeight = spacing.PanelHeight + (htable.Position(4)-20);       
+        spacing.YPos = spacing.YPos + 15;
 
         BpodSystem.GUIHandles.ParameterGUI.Panels.(hPanel.Title).Position(4) = spacing.PanelHeight;
         BpodSystem.GUIData.ParameterGUI.LastParamValues{paramNum} = htable.Data;
