@@ -59,7 +59,11 @@ if isfield(sd, 'RawEvents')
 else
     % This is the first pass to AddTrialEvents. Add session metadata.
     trialNum = 1;
-    sd.Info = struct;
+    % Use to overwrite the preset info
+    if ~isfield(sd,'Info')
+        sd.Info = struct;
+    end
+
     sd.Info.BpodSoftwareVersion = BpodSoftwareVersion_Semantic;
     if BpodSystem.EmulatorMode == 1
         sd.Info.StateMachineVersion = 'Bpod 0.7-1.0 EMULATOR';
