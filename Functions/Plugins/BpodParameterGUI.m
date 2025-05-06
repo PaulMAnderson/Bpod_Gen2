@@ -259,7 +259,12 @@ switch Op
         for p = 1:nParams
             ThisParamName = ParamNames{p};
             ThisParamStyle = BpodSystem.GUIData.ParameterGUI.Styles(p);
-            ThisParamHandle = BpodSystem.GUIHandles.ParameterGUI.Params{p};
+            try % In some matlab version this will be a graphics array (vector) 
+                % others a cell array...
+                ThisParamHandle = BpodSystem.GUIHandles.ParameterGUI.Params(p);
+            catch
+                ThisParamHandle = BpodSystem.GUIHandles.ParameterGUI.Params{p};
+            end
             switch ThisParamStyle
                 case 1 % Edit
                     GUIParam = str2double(get(ThisParamHandle, 'String'));
@@ -300,16 +305,16 @@ save(BpodSystem.SettingsPath,'ProtocolSettings')
 end
 
 function SettingsMenuSaveAs_Callback(~, ~, SettingsMenuHandle)
-global BpodSystem
-global TaskParameters
-ProtocolSettings = BpodParameterGUI('get',TaskParameters);
-[file,path] = uiputfile('*.mat','Select a Bpod ProtocolSettings file.',BpodSystem.SettingsPath);
-if file>0
-    save(fullfile(path,file),'ProtocolSettings')
-    BpodSystem.SettingsPath = fullfile(path,file);
-    [~,SettingsName] = fileparts(file);
-    set(SettingsMenuHandle,'Label',['Settings: ',SettingsName,'.']);
-end
+    global BpodSystem
+    global TaskParameters
+    ProtocolSettings = BpodParameterGUI('get',TaskParameters);
+    [file,path] = uiputfile('*.mat','Select a Bpod ProtocolSettings file.',BpodSystem.Path.Settings);
+    if file>0
+        save(fullfile(path,file),'ProtocolSettings')
+        BpodSystem.Path.Settings = fullfile(path,file);
+        [~,SettingsName] = fileparts(file);
+        set(SettingsMenuHandle,'Label',['Settings: ',SettingsName,'.']);
+    end
 end
 
 function [label, element, style, spacing] = createUIElement(param, paramName, ...
