@@ -2,9 +2,8 @@ function calibrateSpeakers
 
 % Need to find the calibration files
 bpodPath = which('bpod');
-% Go two levels up
-root = fileparts(fileparts(bpodPath));
-calibrationPath = [root filesep 'Bpod Local' filesep 'Calibration Files'];
+root = fileparts(bpodPath);
+calibrationPath = [root filesep 'Calibration Files'];
 addpath(calibrationPath);
 
 
